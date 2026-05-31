@@ -36,7 +36,12 @@ public class Incident {
     private IncidentStatus status;
 
     @Column(name = "reporter_name", nullable = false, length = 100)
-    private String reporterName;    @Column(name = "assigned_to", length = 100)
+    private String reporterName;
+
+    @Column(name = "reporter_email", nullable = false, length = 255)
+    private String reporterEmail;
+
+    @Column(name = "assigned_to", length = 100)
     private String assignedTo;
 
     @Column(name = "resolution", length = 1000)
