@@ -12,6 +12,7 @@ CREATE TABLE incidents (
     severity VARCHAR(50) NOT NULL,
     status VARCHAR(50) NOT NULL,
     reporter_name VARCHAR(100) NOT NULL,
+    reporter_email VARCHAR(255) NOT NULL,
     assigned_to VARCHAR(100),
     resolution VARCHAR(1000),
     created_date DATE NOT NULL,

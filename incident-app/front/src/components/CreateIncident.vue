@@ -100,7 +100,26 @@
                     </div>
                   </div>
                 </div>
-              </div>              <div class="mb-3">
+              </div>
+
+              <div class="mb-3">
+                <label for="reporterEmail" class="form-label">Reporter Email <span class="text-danger">*</span></label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="reporterEmail"
+                  v-model="form.reporterEmail"
+                  :class="{ 'is-invalid': validation.reporterEmail }"
+                  placeholder="Enter reporter email"
+                  maxlength="255"
+                  required
+                >
+                <div v-if="validation.reporterEmail" class="invalid-feedback">
+                  {{ validation.reporterEmail }}
+                </div>
+              </div>
+
+              <div class="mb-3">
                 <label for="assignedTo" class="form-label">Assigned To</label>
                 <input
                   type="text"
@@ -162,6 +181,7 @@ export default {
         description: '',
         severity: '',
         reporterName: '',
+        reporterEmail: '',
         assignedTo: '',
         resolution: ''
       },
@@ -232,7 +252,20 @@ export default {
       } else if (this.form.reporterName.length > 100) {
         this.validation.reporterName = 'Reporter name must not exceed 100 characters'
         isValid = false
-      }      if (this.form.assignedTo.length > 100) {
+      }
+
+      if (!this.form.reporterEmail.trim()) {
+        this.validation.reporterEmail = 'Reporter email is required'
+        isValid = false
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.form.reporterEmail)) {
+        this.validation.reporterEmail = 'Reporter email must be a valid email address'
+        isValid = false
+      } else if (this.form.reporterEmail.length > 255) {
+        this.validation.reporterEmail = 'Reporter email must not exceed 255 characters'
+        isValid = false
+      }
+
+      if (this.form.assignedTo.length > 100) {
         this.validation.assignedTo = 'Assigned to must not exceed 100 characters'
         isValid = false
       }
@@ -262,6 +295,7 @@ export default {
         description: '',
         severity: '',
         reporterName: '',
+        reporterEmail: '',
         assignedTo: '',
         resolution: ''
       }

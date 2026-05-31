@@ -63,7 +63,12 @@
               <div class="row mb-3">
                 <div class="col-sm-3"><strong>Reporter:</strong></div>
                 <div class="col-sm-9">{{ incident.reporterName }}</div>
-              </div>              <div class="row mb-3">
+              </div>
+              <div class="row mb-3">
+                <div class="col-sm-3"><strong>Reporter Email:</strong></div>
+                <div class="col-sm-9">{{ incident.reporterEmail }}</div>
+              </div>
+              <div class="row mb-3">
                 <div class="col-sm-3"><strong>Assigned To:</strong></div>
                 <div class="col-sm-9">{{ incident.assignedTo || 'Unassigned' }}</div>
               </div>
