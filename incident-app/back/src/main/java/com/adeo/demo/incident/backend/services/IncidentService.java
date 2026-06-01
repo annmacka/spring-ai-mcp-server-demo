@@ -102,15 +102,7 @@ public class IncidentService {
     public IncidentDto createIncident(CreateIncidentDto createIncidentDto) {
         log.info("Creating new incident: {}", createIncidentDto.getTitle());
         
-        Incident incident = new Incident();
-        incident.setTitle(createIncidentDto.getTitle());
-        incident.setDescription(createIncidentDto.getDescription());
-        incident.setSeverity(createIncidentDto.getSeverity());        incident.setStatus(IncidentStatus.OPEN); // New incidents are always OPEN
-        incident.setReporterName(createIncidentDto.getReporterName());
-        incident.setAssignedTo(createIncidentDto.getAssignedTo());
-        incident.setResolution(createIncidentDto.getResolution());
-        incident.setCreatedDate(LocalDate.now());
-        incident.setUpdatedDate(LocalDate.now());
+        Incident incident = InitiateIncident(createIncidentDto);
 
         Incident savedIncident = incidentRepository.save(incident);
         log.info("Created incident with ID: {}", savedIncident.getId());
@@ -140,7 +132,7 @@ public class IncidentService {
                     }
                     if (updateIncidentDto.getStatus() != null) {
                         incident.setStatus(updateIncidentDto.getStatus());
-                    }                    if (updateIncidentDto.getAssignedTo() != null) {
+                    }   if (updateIncidentDto.getAssignedTo() != null) {
                         incident.setAssignedTo(updateIncidentDto.getAssignedTo());
                     }
                     if (updateIncidentDto.getResolution() != null) {
@@ -183,12 +175,25 @@ public class IncidentService {
                 incident.getTitle(),
                 incident.getDescription(),
                 incident.getSeverity(),
-                incident.getStatus(),
-                incident.getReporterName(),
-                incident.getAssignedTo(),
+                incident.getStatus(), incident.getReporterName(), incident.getReporterEmail(), incident.getAssignedTo(),
                 incident.getResolution(),
                 incident.getCreatedDate(),
                 incident.getUpdatedDate()
         );
+    }
+
+    private Incident InitiateIncident(CreateIncidentDto createIncidentDto) {
+        Incident incident = new Incident();
+        incident.setTitle(createIncidentDto.getTitle());
+        incident.setDescription(createIncidentDto.getDescription());
+        incident.setSeverity(createIncidentDto.getSeverity());
+        incident.setStatus(IncidentStatus.OPEN); // New incidents are always OPEN
+        incident.setReporterName(createIncidentDto.getReporterName());
+        incident.setReporterEmail(createIncidentDto.getReporterEmail());
+        incident.setAssignedTo(createIncidentDto.getAssignedTo());
+        incident.setResolution(createIncidentDto.getResolution());
+        incident.setCreatedDate(LocalDate.now());
+        incident.setUpdatedDate(LocalDate.now());
+        return incident;
     }
 }

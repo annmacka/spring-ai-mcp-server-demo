@@ -28,7 +28,10 @@ public class IncidentDto {
     
     @JsonProperty("reporterName")
     private String reporterName;
-    
+
+    @JsonProperty("reporterEmail")
+    private String reporterEmail;
+
     @JsonProperty("assignedTo")
     private String assignedTo;
     
@@ -45,15 +48,16 @@ public class IncidentDto {
     public IncidentDto() {}
 
     // Constructor with all fields
-    public IncidentDto(Long id, String title, String description, IncidentSeverity severity, 
-                      IncidentStatus status, String reporterName, String assignedTo, 
-                      String resolution, LocalDate createdDate, LocalDate updatedDate) {
+    public IncidentDto(Long id, String title, String description, IncidentSeverity severity,
+                      IncidentStatus status, String reporterName, String reporterEmail,
+                      String assignedTo, String resolution, LocalDate createdDate, LocalDate updatedDate) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.severity = severity;
         this.status = status;
         this.reporterName = reporterName;
+        this.reporterEmail = reporterEmail;
         this.assignedTo = assignedTo;
         this.resolution = resolution;
         this.createdDate = createdDate;
@@ -79,6 +83,9 @@ public class IncidentDto {
     public String getReporterName() { return reporterName; }
     public void setReporterName(String reporterName) { this.reporterName = reporterName; }
 
+    public String getReporterEmail() { return reporterEmail; }
+    public void setReporterEmail(String reporterEmail) { this.reporterEmail = reporterEmail; }
+
     public String getAssignedTo() { return assignedTo; }
     public void setAssignedTo(String assignedTo) { this.assignedTo = assignedTo; }
 
@@ -100,6 +107,7 @@ public class IncidentDto {
                 ", severity=" + severity +
                 ", status=" + status +
                 ", reporterName='" + reporterName + '\'' +
+                ", reporterEmail='" + reporterEmail + '\'' +
                 ", assignedTo='" + assignedTo + '\'' +
                 ", resolution='" + resolution + '\'' +
                 ", createdDate=" + createdDate +

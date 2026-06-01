@@ -19,7 +19,10 @@ public class CreateIncidentDto {
     
     @JsonProperty("reporterName")
     private String reporterName;
-    
+
+    @JsonProperty("reporterEmail")
+    private String reporterEmail;
+
     @JsonProperty("assignedTo")
     private String assignedTo;
     
@@ -30,20 +33,22 @@ public class CreateIncidentDto {
     public CreateIncidentDto() {}
 
     // Constructor with required fields
-    public CreateIncidentDto(String title, String description, IncidentSeverity severity, String reporterName) {
+    public CreateIncidentDto(String title, String description, IncidentSeverity severity, String reporterName, String reporterEmail) {
         this.title = title;
         this.description = description;
         this.severity = severity;
         this.reporterName = reporterName;
+        this.reporterEmail = reporterEmail;
     }
 
     // Constructor with all fields
-    public CreateIncidentDto(String title, String description, IncidentSeverity severity, 
-                           String reporterName, String assignedTo, String resolution) {
+    public CreateIncidentDto(String title, String description, IncidentSeverity severity,
+                           String reporterName, String reporterEmail, String assignedTo, String resolution) {
         this.title = title;
         this.description = description;
         this.severity = severity;
         this.reporterName = reporterName;
+        this.reporterEmail = reporterEmail;
         this.assignedTo = assignedTo;
         this.resolution = resolution;
     }
@@ -61,6 +66,9 @@ public class CreateIncidentDto {
     public String getReporterName() { return reporterName; }
     public void setReporterName(String reporterName) { this.reporterName = reporterName; }
 
+    public String getReporterEmail() { return reporterEmail; }
+    public void setReporterEmail(String reporterEmail) { this.reporterEmail = reporterEmail; }
+
     public String getAssignedTo() { return assignedTo; }
     public void setAssignedTo(String assignedTo) { this.assignedTo = assignedTo; }
 
@@ -74,8 +82,23 @@ public class CreateIncidentDto {
                 ", description='" + description + '\'' +
                 ", severity=" + severity +
                 ", reporterName='" + reporterName + '\'' +
+                ", reporterEmail='" + reporterEmail + '\'' +
                 ", assignedTo='" + assignedTo + '\'' +
                 ", resolution='" + resolution + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CreateIncidentDto that = (CreateIncidentDto) o;
+        return title.equals(that.title) &&
+                description.equals(that.description) &&
+                severity == that.severity &&
+                reporterName.equals(that.reporterName) &&
+                reporterEmail.equals(that.reporterEmail) &&
+                assignedTo.equals(that.assignedTo) &&
+                resolution.equals(that.resolution);
     }
 }
